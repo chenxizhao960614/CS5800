@@ -1,0 +1,5 @@
+requests==2.31.0
+osmnx==1.6.0
+networkx==3.2.1
+shapely==2.0.2
+matplotlib==3.8.2
