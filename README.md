@@ -22,7 +22,7 @@ Install required Python packages:
 pip install -r requirements.txt
 ```
 
-##🚀 How to Run
+## 🚀 How to Run
 ```bash
 python vancouver_map.py
 ```
