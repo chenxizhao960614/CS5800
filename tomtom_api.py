@@ -37,8 +37,6 @@ def get_flow_data(lat, lon):
     if response.status_code == 200:
         data = response.json().get('flowSegmentData', {})
         return {
-            'travelTime': data.get('currentTravelTime'),
-            'freeFlowTravelTime': data.get('freeFlowTravelTime'),
             'confidence': data.get('confidence'),
             'currentSpeed': data.get('currentSpeed'),
             'freeFlowSpeed': data.get('freeFlowSpeed')
@@ -70,30 +68,32 @@ def calculate_edge_weight(flow, incident_props, length=100):
     if icon_category == 8:
         return float('inf')
 
-    # 2. No flow data — fallback to static
-    if not flow:
-        return length / 8.33  # Assume 8.33 m/s (~30 km/h)
+    confidence = 1.0
+    current_speed = 0
+    free_flow_speed = 0
 
-    confidence = flow.get("confidence", 1.0)
-    current_speed = flow.get("currentSpeed", 0)  # in km/h
-    free_flow_speed = flow.get("freeFlowSpeed", 0) # in km/h
+    if flow:
+        confidence = flow.get("confidence", 1.0)
+        current_speed = flow.get("currentSpeed", 0)  # in km/h
+        free_flow_speed = flow.get("freeFlowSpeed", 0)  # in km/h
 
-    # 3. Use current speed if available and valid
-    if current_speed and current_speed > 0:
+    # 2. Use current speed if available and valid
+    if current_speed > 0:
         current_speed_mps = current_speed * 1000 / 3600
-        current_travel_time = length / current_speed_mps
+        base_time = length / current_speed_mps
         if confidence >= 0.7:
-            return current_travel_time
+            return base_time
         else:
-            penalty = compute_proportional_penalty(current_travel_time, magnitude)
-            return current_travel_time + penalty
+            penalty = compute_proportional_penalty(base_time, magnitude)
+            return base_time + penalty
 
-    # 4. Fallback to free flow speed with penalty
-    if free_flow_speed and free_flow_speed > 0:
+    # 3. Fallback to free flow speed with penalty
+    if free_flow_speed > 0:
         free_speed_mps = free_flow_speed * 1000 / 3600
-        free_travel_time = length / free_speed_mps
-        penalty = compute_proportional_penalty(free_travel_time, magnitude)
-        return free_travel_time + penalty
+        base_time = length / free_speed_mps
+        penalty = compute_proportional_penalty(base_time, magnitude)
+        return base_time + penalty
 
-    # 5. Final fallback: use static length
-    return length / 8.33
+    # 4. Final fallback: static speed estimate (including no flow data)
+    base_time = length / 8.33  # 30 km/h = 8.33 m/s
+    return base_time + compute_proportional_penalty(base_time, magnitude)

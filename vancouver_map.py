@@ -93,11 +93,11 @@ def update_edge_weights_with_bbox(G, start_lat, start_lon, end_lat, end_lon, buf
         incident_props = find_nearby_incident(lat, lon, incidents)
         weight = calculate_edge_weight(flow, incident_props, length)
         data["weight"] = weight
-   
+
         if weight == float('inf'):
             blocked += 1
 
-    print(f"🚫 Total blocked edges: {blocked}")
+    print(f"Total blocked edges: {blocked}")
 
 
 # === Routing ===
@@ -133,21 +133,21 @@ def compute_route(G, start_lat, start_lon, end_lat, end_lon, threshold=1000):
         start_node  : Nearest graph node to start point
         end_node    : Nearest graph node to end point
     """
-    # Step 1: Find nearest nodes on the graph
+    # Find nearest nodes on the graph
     start_node = ox.nearest_nodes(G, X=start_lon, Y=start_lat)
     end_node = ox.nearest_nodes(G, X=end_lon, Y=end_lat)
 
-    # Step 2: Compute straight-line distance
+    # Compute straight-line distance
     dist = haversine_distance(start_lat, start_lon, end_lat, end_lon)
-    print(f"📏 Straight-line distance: {int(dist)} meters")
+    print(f"Straight-line distance: {int(dist)} meters")
 
     try:
-        # Step 3: Choose algorithm based on threshold
+        # Choose algorithm based on threshold
         if dist < threshold:
-            print("🔍 Using Dijkstra algorithm (short range)")
+            print("Using Dijkstra algorithm (short range)")
             path = nx.shortest_path(G, source=start_node, target=end_node, weight="weight")
         else:
-            print("✨ Using A* algorithm (long range)")
+            print("Using A* algorithm (long range)")
             path = nx.astar_path(
                 G,
                 source=start_node,
@@ -158,12 +158,12 @@ def compute_route(G, start_lat, start_lon, end_lat, end_lon, threshold=1000):
         return path, start_node, end_node
 
     except nx.NetworkXNoPath:
-        print("❌ No path found between the selected nodes.")
+        print("No path found between the selected nodes.")
         return None, start_node, end_node
 
 
 def compute_directions(G, path):
-    print("\n📍 Turn-by-Turn Directions:")
+    print("\n Turn-by-Turn Directions:")
     i = 0
     while i < len(path) - 2:
         u, v, w = path[i], path[i+1], path[i+2]
@@ -211,13 +211,13 @@ if __name__ == "__main__":
     end_lat = float(input("End latitude: "))
     end_lon = float(input("End longitude: "))
 
-    print("🔄 Updating edge weights with TomTom traffic data...")
+    print("Updating edge weights with TomTom traffic data...")
     update_edge_weights_with_bbox(G, start_lat, start_lon, end_lat, end_lon)
 
-    print("🧭 Computing the optimal path...")
+    print("Computing the optimal path...")
     path, start_node, end_node = compute_route(G, start_lat, start_lon, end_lat, end_lon)
 
-    print("\n🔍 Edge weight diagnostics along the route:")
+    print("\nEdge weight diagnostics along the route:")
     for u, v in zip(path[:-1], path[1:]):
         edge = G.edges[u, v, 0]
         print(f"{u} → {v} | Length: {edge.get('length', 0):.1f} m | Weight: {edge.get('weight', 0):.1f} sec")
@@ -226,10 +226,10 @@ if __name__ == "__main__":
         # Output summary
         total_dist = sum(G.edges[u, v, 0].get("length", 0) for u, v in zip(path[:-1], path[1:]))
         total_time = sum(G.edges[u, v, 0].get("weight", 0) for u, v in zip(path[:-1], path[1:]))
-        print(f"✅ Distance: {int(total_dist)} m, Time: {total_time/60:.1f} min")
+        print(f"Distance: {int(total_dist)} m, Time: {total_time/60:.1f} min")
         compute_directions(G, path)
     else:
-        print("❌ No route found.")
+        print("No route found.")
 
     print("Route found. Plotting with start/end points...")
     fig, ax = ox.plot_graph_route(G, path, route_linewidth=4, node_size=0, show=False, close=False)
