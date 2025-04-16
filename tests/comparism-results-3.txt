@@ -1,0 +1,224 @@
+Emergency Route Finder
+=====================
+
+Loading cached road network...
+G:\Edcartech.com\Projects\Base\Jobs\Schools\NothEastern\School Begins\Courses\CS5800 Algorithms Spring 2025\Final Project\codes-base\venv\Lib\site-packages\networkx\readwrite\json_graph\node_link.py:287: FutureWarning: 
+The default value will be changed to `edges="edges" in NetworkX 3.6.
+
+To make this warning go away, explicitly set the edges kwarg, e.g.:
+
+  nx.node_link_graph(data, edges="links") to preserve current behavior, or
+  nx.node_link_graph(data, edges="edges") for forward compatibility.
+  warnings.warn(
+Loaded graph with 8109 nodes and 23250 edges
+Added weights to 23250/23250 edges        
+
+Simulating rush hour traffic conditions...
+Updating graph with traffic data...
+Warning: Error processing edge (11072022441, 575905640, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (11105783234, 12700859729, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (3672525916, 268528442, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (3673125470, 268528503, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (628020012, 628020022, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (520753183, 520753195, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (11110429477, 11106039342, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (628020022, 628020012, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (320093525, 430037812, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (221876635, 347293810, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (348069335, 127328073, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (553506506, 348069014, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (127328073, 348069335, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (430040559, 31311132, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (31311132, 430040559, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (11108811801, 11108823340, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (347293810, 221876635, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (575905640, 11072022441, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (344593761, 10822573617, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>       
+Used 16255 cached traffic data points
+Simulated traffic data for 0 road segments
+Updating graph with traffic data...
+Warning: Error processing edge (3673125470, 268528503, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (348069335, 127328073, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (10822573617, 344593761, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (268528442, 268528503, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (11110429477, 11106039342, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (553506506, 348069014, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (31311132, 430040559, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (628020022, 628020012, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (11106039342, 11110429477, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>     
+Warning: Error processing edge (221876635, 347293810, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (11108811801, 11108823340, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (628020012, 628020022, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (344593761, 10822573617, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (320093525, 430037812, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (430040559, 31311132, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (1309735233, 520786419, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (268528442, 3672525916, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (347293810, 221876635, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (127328073, 348069335, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (430037812, 320093525, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Warning: Error processing edge (575905640, 11072022441, 0): unhashable type: 'list' - Geometry type: <class 'shapely.geometry.linestring.LineString'>
+Used 16253 cached traffic data points
+Simulated traffic data for 0 road segments
+
+Opening map for point selection...
+Please follow these steps:
+1. Wait for the map window to load completely
+2. Click once to set your starting point
+3. Click again to set your destination
+4. Click 'Confirm Selection' when done
+
+Calculating optimal routes...
+Dijkstra Edge (12289441196, 12289441197): Weight=1.38s, Node delay=0.00s
+Dijkstra Edge (12289441197, 247688546): Weight=12.61s, Node delay=0.00s
+Dijkstra Edge (247688546, 428959951): Weight=7.38s, Node delay=0.00s
+Dijkstra Edge (428959951, 247688569): Weight=7.39s, Node delay=0.00s
+Dijkstra Edge (247688569, 247688570): Weight=12.67s, Node delay=0.00s
+Dijkstra Edge (247688570, 428959963): Weight=10.57s, Node delay=0.00s
+Dijkstra Edge (428959963, 25251496): Weight=12.15s, Node delay=0.00s
+Dijkstra Edge (25251496, 723113995): Weight=11.59s, Node delay=0.00s
+Dijkstra Edge (723113995, 247688582): Weight=3.08s, Node delay=0.00s
+Dijkstra Edge (247688582, 247688594): Weight=12.89s, Node delay=0.00s
+Dijkstra Edge (247688594, 8009991886): Weight=9.82s, Node delay=0.00s
+Dijkstra Edge (8009991886, 247688598): Weight=0.38s, Node delay=0.00s
+Dijkstra Edge (247688598, 247688603): Weight=9.12s, Node delay=0.00s
+Dijkstra Edge (247688603, 11136507594): Weight=15.17s, Node delay=0.00s
+Dijkstra Edge (11136507594, 11136507595): Weight=1.36s, Node delay=0.00s
+Dijkstra Edge (11136507595, 244152860): Weight=16.42s, Node delay=0.00s
+Dijkstra Edge (244152860, 244085840): Weight=8.79s, Node delay=0.00s
+Dijkstra Edge (244085840, 570541727): Weight=15.51s, Node delay=0.00s
+Dijkstra Edge (570541727, 4693725254): Weight=11.77s, Node delay=0.00s
+Dijkstra Edge (4693725254, 11184829158): Weight=0.72s, Node delay=0.00s
+Dijkstra Edge (11184829158, 4693725255): Weight=0.63s, Node delay=0.00s
+Dijkstra Edge (4693725255, 628472559): Weight=7.96s, Node delay=0.00s
+Dijkstra Edge (628472559, 11184829162): Weight=2.24s, Node delay=0.00s
+Dijkstra Edge (11184829162, 11184829161): Weight=4.22s, Node delay=0.00s
+Dijkstra Edge (11184829161, 11172155782): Weight=4.06s, Node delay=0.00s
+Dijkstra Edge (11172155782, 244085845): Weight=11.81s, Node delay=0.00s
+Dijkstra Edge (244085845, 244085868): Weight=1.50s, Node delay=0.00s
+Dijkstra Edge (244085868, 251241888): Weight=8.66s, Node delay=0.00s
+Dijkstra Edge (251241888, 11172155775): Weight=2.60s, Node delay=0.00s
+Dijkstra Edge (11172155775, 251241900): Weight=6.77s, Node delay=0.00s
+Dijkstra Edge (251241900, 11172155770): Weight=6.22s, Node delay=0.00s
+Dijkstra Edge (11172155770, 251241873): Weight=10.92s, Node delay=0.00s
+Dijkstra Edge (251241873, 11145118113): Weight=10.37s, Node delay=0.00s
+Dijkstra Edge (11145118113, 561195990): Weight=15.05s, Node delay=0.00s
+Dijkstra Edge (561195990, 561196343): Weight=9.56s, Node delay=0.00s
+Dijkstra Edge (561196343, 8558718547): Weight=7.99s, Node delay=0.00s
+Dijkstra Edge (8558718547, 11172155763): Weight=2.61s, Node delay=0.00s
+Dijkstra Edge (11172155763, 8558718550): Weight=2.28s, Node delay=0.00s
+Dijkstra Edge (8558718550, 343313060): Weight=4.20s, Node delay=0.00s
+Dijkstra Edge (343313060, 5151672923): Weight=3.97s, Node delay=0.00s
+Dijkstra Edge (5151672923, 343312821): Weight=0.32s, Node delay=0.00s
+Dijkstra Edge (343312821, 3478231535): Weight=10.58s, Node delay=0.00s
+Dijkstra Edge (3478231535, 3478231533): Weight=10.12s, Node delay=0.00s
+Dijkstra Edge (3478231533, 654647902): Weight=10.86s, Node delay=0.00s
+Dijkstra Edge (654647902, 247105652): Weight=1.16s, Node delay=0.00s
+Dijkstra Edge (247105652, 4711606523): Weight=10.08s, Node delay=0.00s
+Dijkstra Edge (4711606523, 10942372262): Weight=2.60s, Node delay=0.00s
+Dijkstra Edge (10942372262, 10942372258): Weight=5.54s, Node delay=0.00s
+Dijkstra Edge (10942372258, 10942381218): Weight=3.31s, Node delay=0.00s
+Dijkstra Edge (10942381218, 12446015910): Weight=1.51s, Node delay=0.00s
+Dijkstra Edge (12446015910, 12446006479): Weight=6.29s, Node delay=0.00s
+Dijkstra Edge (12446006479, 10942381221): Weight=7.00s, Node delay=0.00s
+Dijkstra Edge (10942381221, 3528892722): Weight=18.53s, Node delay=0.00s
+Dijkstra total path weight: 392.31s
+Dijkstra expanded 5054 nodes
+A* Edge (12289441196, 12289441197): Weight=1.38s, Node delay=0.00s
+A* Edge (12289441197, 247688546): Weight=12.61s, Node delay=0.00s
+A* Edge (247688546, 428959951): Weight=7.38s, Node delay=0.00s
+A* Edge (428959951, 247688569): Weight=7.39s, Node delay=0.00s
+A* Edge (247688569, 247688570): Weight=12.67s, Node delay=0.00s
+A* Edge (247688570, 428959963): Weight=10.57s, Node delay=0.00s
+A* Edge (428959963, 25251496): Weight=12.15s, Node delay=0.00s
+A* Edge (25251496, 723113995): Weight=11.59s, Node delay=0.00s
+A* Edge (723113995, 247688582): Weight=3.08s, Node delay=0.00s
+A* Edge (247688582, 247688594): Weight=12.89s, Node delay=0.00s
+A* Edge (247688594, 8009991886): Weight=9.82s, Node delay=0.00s
+A* Edge (8009991886, 247688598): Weight=0.38s, Node delay=0.00s
+A* Edge (247688598, 247688603): Weight=9.12s, Node delay=0.00s
+A* Edge (247688603, 11136507594): Weight=15.17s, Node delay=0.00s
+A* Edge (11136507594, 11136507595): Weight=1.36s, Node delay=0.00s
+A* Edge (11136507595, 244152860): Weight=16.42s, Node delay=0.00s
+A* Edge (244152860, 244085840): Weight=8.79s, Node delay=0.00s
+A* Edge (244085840, 570541727): Weight=15.51s, Node delay=0.00s
+A* Edge (570541727, 4693725254): Weight=11.77s, Node delay=0.00s
+A* Edge (4693725254, 11184829158): Weight=0.72s, Node delay=0.00s
+A* Edge (11184829158, 4693725255): Weight=0.63s, Node delay=0.00s
+A* Edge (4693725255, 628472559): Weight=7.96s, Node delay=0.00s
+A* Edge (628472559, 11184829162): Weight=2.24s, Node delay=0.00s
+A* Edge (11184829162, 11184829161): Weight=4.22s, Node delay=0.00s
+A* Edge (11184829161, 11172155782): Weight=4.06s, Node delay=0.00s
+A* Edge (11172155782, 244085845): Weight=11.81s, Node delay=0.00s
+A* Edge (244085845, 244085868): Weight=1.50s, Node delay=0.00s
+A* Edge (244085868, 251241888): Weight=8.66s, Node delay=0.00s
+A* Edge (251241888, 11172155775): Weight=2.60s, Node delay=0.00s
+A* Edge (11172155775, 251241900): Weight=6.77s, Node delay=0.00s
+A* Edge (251241900, 11172155770): Weight=6.22s, Node delay=0.00s
+A* Edge (11172155770, 251241873): Weight=10.92s, Node delay=0.00s
+A* Edge (251241873, 11145118113): Weight=10.37s, Node delay=0.00s
+A* Edge (11145118113, 561195990): Weight=15.05s, Node delay=0.00s
+A* Edge (561195990, 561196343): Weight=9.56s, Node delay=0.00s
+A* Edge (561196343, 8558718547): Weight=7.99s, Node delay=0.00s
+A* Edge (8558718547, 11172155763): Weight=2.61s, Node delay=0.00s
+A* Edge (11172155763, 8558718550): Weight=2.28s, Node delay=0.00s
+A* Edge (8558718550, 343313060): Weight=4.20s, Node delay=0.00s
+A* Edge (343313060, 5151672923): Weight=3.97s, Node delay=0.00s
+A* Edge (5151672923, 343312821): Weight=0.32s, Node delay=0.00s
+A* Edge (343312821, 3478231535): Weight=10.58s, Node delay=0.00s
+A* Edge (3478231535, 3478231533): Weight=10.12s, Node delay=0.00s
+A* Edge (3478231533, 654647902): Weight=10.86s, Node delay=0.00s
+A* Edge (654647902, 247105652): Weight=1.16s, Node delay=0.00s
+A* Edge (247105652, 4711606523): Weight=10.08s, Node delay=0.00s
+A* Edge (4711606523, 10942372262): Weight=2.60s, Node delay=0.00s
+A* Edge (10942372262, 10942372258): Weight=5.54s, Node delay=0.00s
+A* Edge (10942372258, 10942381218): Weight=3.31s, Node delay=0.00s
+A* Edge (10942381218, 12446015910): Weight=1.51s, Node delay=0.00s
+A* Edge (12446015910, 12446006479): Weight=6.29s, Node delay=0.00s
+A* Edge (12446006479, 10942381221): Weight=7.00s, Node delay=0.00s
+A* Edge (10942381221, 3528892722): Weight=18.53s, Node delay=0.00s
+A* total path weight: 392.31s
+
+=== Route Comparison ===
+
+Dijkstra's Algorithm:
+- Path length: 54 nodes
+- Estimated travel time: 392.31 seconds
+
+A* Algorithm:
+- Path length: 54 nodes
+- Estimated travel time: 392.31 seconds
+
+Generating route visualization...
+invalid command name "3067172511552update_canvas_tile_images"
+    while executing
+"3067172511552update_canvas_tile_images"
+    ("after" script)
+invalid command name "3067172527808update"
+    while executing
+"3067172527808update"
+    ("after" script)
+invalid command name "3067172510272_check_queue"
+    while executing
+"3067172510272_check_queue"
+    ("after" script)
+invalid command name "3067172512192check_dpi_scaling"
+    while executing
+"3067172512192check_dpi_scaling"
+    ("after" script)
+invalid command name "3067172558336_click_animation"
+    while executing
+"3067172558336_click_animation"
+    ("after" script)
+Dijkstra path: 54 nodes, coordinates: 54 points
+A* path: 54 nodes, coordinates: 54 points
+Verified Dijkstra travel time: 392.31s
+Verified A* travel time: 392.31s
+
+Serving map at http://localhost:5500/data/processed/interactive_map.html
+
+Route planning completed successfully!
+
+Visualizations have been saved to:
+- data/processed/route_comparison.png
+- data/processed/interactive_map.html 

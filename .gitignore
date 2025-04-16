@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# Project specific
+data/cache/
+data/processed/
+cache/
+data/cache/**/*.json
+**/traffic_*.json
+*_cache.json
+
+# Keep important data files
+!data/processed/road_network.json
+!**/config.json
+
+# Generated results
+*.png
+*.html
+*_results.csv
+*_results.txt
+
+# Environment
+# .env
+# .venv
+# env/
+# venv/
+# ENV/
+
+# System
+.DS_Store
+Thumbs.db

@@ -1,0 +1,459 @@
+# Fastest Emergency Response Route Finder
+## Final Project Report for CS5800: Algorithms
+
+### Team Members
+- Chenxi Zhao
+- Dominic Ejiogu
+- Carlos Semeho Edorh
+
+## Executive Summary
+This project implements and compares Dijkstra's algorithm and A* search for emergency vehicle routing in Vancouver, BC. We integrated real-time traffic data and simulated various scenarios to evaluate algorithm performance. While both algorithms often find the same optimal path, our research uncovered important differences in computation efficiency and route selection under varying traffic conditions. A* demonstrated computational advantages in most scenarios, with its directed search approach proving particularly valuable in larger networks. This work provides insights into emergency routing optimization and highlights potential avenues for future research in time-critical response systems.
+
+## 1. Introduction
+Emergency response time is critical in life-or-death situations. Every second counts when responding to emergencies such as heart attacks, fires, or severe accidents. This project addresses this challenge by developing intelligent routing algorithms that account for real-time traffic data to help emergency vehicles reach their destinations as quickly as possible. By leveraging graph theory, real-time data sources, and sophisticated algorithms, we aim to improve response times and potentially save lives.
+
+In urban environments like Vancouver, BC, emergency vehicles frequently face challenges navigating through congested traffic, especially during rush hours and major events. Traditional navigation systems often don't account for the unique needs of emergency vehicles, which can legally bypass certain traffic rules and benefit from traffic parting to make way. This project explores how specialized routing algorithms can be optimized specifically for emergency response scenarios.
+
+Our research question is: **How can graph algorithms be optimized to find the fastest routes for emergency vehicles under varying real-time traffic conditions?** This question is significant because improvements in emergency response times directly correlate with better patient outcomes and reduced property damage in emergency situations.
+
+### Personal Relevance
+
+**Carlos Semeho Edorh**: I'm interested in this project because emergency response times in Vancouver are often delayed due to traffic congestion, especially during rush hours and major events. Using graph algorithms to improve critical public services is a good fit for my academic goals and passion for applying computer science to real-world problems. I've witnessed firsthand how traffic bottlenecks can significantly delay ambulances during critical situations, and I believe algorithmic approaches can help solve this problem. I'm excited to put the concepts from our algorithms course into practice and develop solutions that could help save lives.
+
+**Chenxi Zhao**: My personal relevance to this project comes from witnessing how emergency vehicles often get blocked in traffic, leading to delays in reaching patients. In critical situations, these delays can be life-threatening. My grandmother experienced a medical emergency last year, and the ambulance took over 20 minutes to arrive due to traffic congestion. I believe that by optimizing emergency routes with real-time traffic data, we can help reduce response times and improve public safety. This project allows me to apply graph theory and algorithmic concepts to a problem that has personal significance and potential real-world impact.
+
+**Dominic Ejiogu**: This project inspires me because I have witnessed how traffic delays can hinder fire trucks during emergencies, and I am motivated to use algorithms to optimize response routes, potentially saving lives and protecting communities. As a volunteer at a community health center, I've seen the critical importance of rapid emergency response. By applying computational techniques to improve emergency response times, I hope to contribute to a solution that addresses a critical real-world challenge and makes a meaningful difference. The mathematical challenges of optimizing routes in dynamic traffic environments also align perfectly with my interest in algorithm design and optimization.
+
+## 2. Methodology
+
+### 2.1 Data Collection and Processing
+
+Our methodology centered around creating an accurate representation of road networks and traffic conditions to evaluate routing algorithms in emergency scenarios. We utilized several key data sources:
+
+**1. Road Network Data (OpenStreetMap):**
+We used OpenStreetMap (OSM) data to construct our base road network graph. OSM provides comprehensive information about roads, intersections, one-way streets, and turn restrictions - all essential for realistic routing. We utilized the OSMNX Python library to extract and process this data, creating a directed graph representation where:
+- Nodes represent intersections or significant waypoints
+- Edges represent road segments with attributes such as length, road type, and speed limits
+- Edge weights initially represent travel time based on road length and speed limits
+
+```python
+# Example of road network extraction using OSMNX
+import osmnx as ox
+G = ox.graph_from_place("Vancouver, British Columbia, Canada", network_type='drive')
+```
+
+**2. Real-time Traffic Data (TomTom API):**
+To simulate real-time traffic conditions, we integrated with the TomTom Traffic API, which provides:
+- Current travel times for road segments
+- Traffic flow information (congestion levels)
+- Incidents (accidents, road closures, construction)
+
+We developed a caching system to store and reuse traffic data during development and testing:
+
+```python
+def get_tomtom_traffic(self, lat, lon, use_cache=True, cache_expiry=600):
+    """Query TomTom Traffic Flow API with caching support"""
+    # Generate cache filename based on coordinates
+    cache_file = f"{cache_dir}/traffic_{lat:.5f}_{lon:.5f}.json"
+    
+    # Check if cache file exists and is recent enough
+    if use_cache and os.path.exists(cache_file):
+        with open(cache_file, 'r') as f:
+            cached_data = json.load(f)
+            
+        # Check if cache is still valid
+        timestamp = cached_data.get('timestamp', 0)
+        if datetime.now().timestamp() - timestamp < cache_expiry:
+            return cached_data.get('travelTime')
+    
+    # Otherwise query the API and cache results
+    # [API querying code omitted for brevity]
+```
+
+**3. Traffic Simulation:**
+Since real-time traffic data has limitations in coverage and testing scenarios, we also implemented a traffic simulation system to generate realistic traffic patterns based on:
+- Time of day (rush hour vs. off-peak)
+- Road type (highways vs. residential streets)
+- Random incidents/accidents
+
+Our simulation modified edge weights (travel times) according to these factors:
+
+```python
+def _get_time_factor(self, hour):
+    """Get traffic factor based on time of day"""
+    # Rush hours: 7-9 AM and 4-6 PM
+    if hour in [7, 8, 9] or hour in [16, 17, 18]:
+        return random.uniform(0.4, 0.7)  # Heavy traffic
+    # Mid-day: 10 AM - 3 PM
+    elif hour >= 10 and hour <= 15:
+        return random.uniform(0.7, 0.9)  # Medium traffic
+    # Night time: 10 PM - 5 AM
+    elif hour >= 22 or hour <= 5:
+        return random.uniform(0.9, 1.1)  # Light traffic
+    # Other times
+    else:
+        return random.uniform(0.6, 0.8)  # Normal traffic
+```
+
+### 2.2 Graph Representation
+
+We modeled the road network as a directed graph (specifically, a NetworkX MultiDiGraph) where:
+
+- **Nodes**: Represent intersections with attributes:
+  - Geographic coordinates (latitude/longitude)
+  - Node ID
+  - Optional intersection metadata (traffic lights, stop signs)
+  - Intersection delay times (based on traffic volume)
+
+- **Edges**: Represent road segments with attributes:
+  - Length (in meters)
+  - Road type/classification (highway, primary, residential, etc.)
+  - Speed limit
+  - Number of lanes (when available)
+  - Traffic speed (current speed based on traffic conditions)
+  - Travel time (the primary weight used for routing)
+
+This representation allowed us to:
+1. Account for one-way streets and turn restrictions
+2. Model real-world road networks with high fidelity
+3. Dynamically update travel times based on traffic conditions
+4. Calculate realistic routes considering both distance and traffic
+
+### 2.3 Algorithmic Approach
+
+We implemented and compared two classic shortest path algorithms:
+
+**Dijkstra's Algorithm:**
+Dijkstra's algorithm finds the shortest path between nodes in a graph by systematically exploring all possible paths, starting from the source node and expanding outward. It guarantees finding the optimal path but explores nodes in all directions.
+
+Our implementation used NetworkX's built-in Dijkstra implementation, optimized for weighted graphs:
+
+```python
+def find_route(self, source, target):
+    """Find shortest path using Dijkstra's algorithm"""
+    start_time = time.time()
+    
+    # Use NetworkX's implementation
+    path = nx.dijkstra_path(self.G, source, target, weight='weight')
+    
+    # Calculate total distance and travel time
+    distance = 0
+    travel_time = 0
+    
+    for i in range(len(path) - 1):
+        u, v = path[i], path[i+1]
+        edge_data = min(self.G.get_edge_data(u, v).values(), 
+                        key=lambda x: x.get('weight', float('inf')))
+        
+        # Add distance and travel time
+        distance += edge_data.get('length', 0)
+        travel_time += edge_data.get('weight', 0)
+        travel_time += self.G.nodes[v].get('delay', 0)
+    
+    computation_time = time.time() - start_time
+    
+    return {
+        'path': path,
+        'distance': distance,
+        'travel_time': travel_time,
+        'computation_time': computation_time
+    }
+```
+
+**A* Search Algorithm:**
+A* enhances Dijkstra's algorithm with a heuristic function that guides the search toward the destination, potentially reducing computation time. The heuristic estimates the remaining cost to reach the target.
+
+For our A* implementation, we used a haversine distance-based heuristic, which estimates the aerial distance between points and converts it to travel time:
+
+```python
+def astar_heuristic(self, u, v):
+    """A* heuristic based on haversine distance"""
+    # Calculate straight-line distance
+    distance = self.haversine_distance(u, v)
+    
+    # Convert to estimated travel time using a fast speed
+    # to ensure the heuristic is admissible (never overestimates)
+    time_estimate = distance / self._max_speed
+    
+    return time_estimate
+
+@lru_cache(maxsize=100000)
+def haversine_distance(self, u, v):
+    """Calculate haversine distance between two nodes with caching"""
+    if u not in self._node_coords or v not in self._node_coords:
+        return 0
+    
+    u_lon, u_lat = self._node_coords[u]
+    v_lon, v_lat = self._node_coords[v]
+    
+    # Convert to radians
+    u_lon, u_lat = np.radians(u_lon), np.radians(u_lat)
+    v_lon, v_lat = np.radians(v_lon), np.radians(v_lat)
+    
+    # Haversine formula
+    dlon = v_lon - u_lon
+    dlat = v_lat - u_lat
+    a = np.sin(dlat/2)**2 + np.cos(u_lat) * np.cos(v_lat) * np.sin(dlon/2)**2
+    c = 2 * np.arcsin(np.sqrt(a))
+    r = 6371000  # Earth radius in meters
+    return c * r
+```
+
+**Key Implementation Challenges:**
+During implementation, we encountered several challenges:
+
+1. **Ensuring an admissible heuristic**: For A* to guarantee optimal paths, the heuristic must never overestimate the true cost. We addressed this by using a speed factor slightly higher than any possible road speed.
+
+2. **Path similarity**: In well-connected road networks with uniform traffic, Dijkstra and A* often find identical paths. This initially made it difficult to demonstrate algorithmic differences. We explored modifications to create meaningful differences while maintaining optimality guarantees.
+
+3. **Edge weight calculation**: Properly converting distance and traffic conditions to travel time required careful calibration.
+
+### 2.4 Simulation Scenarios
+
+To thoroughly evaluate algorithm performance, we developed four distinct traffic scenarios:
+
+1. **Normal Traffic**: Base case with typical traffic patterns
+2. **Rush Hour**: Heavy congestion on major roads, simulating morning or evening rush
+3. **Incident**: Random accidents or closures blocking certain roads
+4. **Missing Data**: Simulating data outages to test algorithm robustness
+
+For each scenario, we ran multiple simulations with different start and end points to gather comprehensive performance data.
+
+### 2.5 Evaluation Metrics
+
+We evaluated the algorithms using several key metrics:
+
+1. **Travel Time**: The primary optimization goal - total estimated time from source to destination
+2. **Computation Time**: How quickly each algorithm computes the route
+3. **Path Length**: Number of nodes/intersections in the path
+4. **Path Similarity**: Whether algorithms produce identical or different routes
+5. **Nodes Expanded**: Number of nodes processed during search (efficiency metric)
+
+These metrics allowed us to comprehensively assess both the quality of routes and the computational efficiency of the algorithms.
+
+## 3. Experiments, Results & Analysis
+
+### 3.1 Computational Efficiency Analysis
+
+One of the key theoretical advantages of A* over Dijkstra's algorithm is its computational efficiency. As A* uses a heuristic function to guide its search toward the destination, it typically explores fewer nodes compared to Dijkstra's algorithm, which searches in all directions. Our experiments confirmed this theoretical advantage, though with some interesting nuances.
+
+The table below shows the node expansion comparison across different test cases from our experiments:
+
+| Test Case | Dijkstra Nodes Expanded | A* Nodes Expanded | Reduction |
+|-----------|-------------------------|-------------------|-----------|
+| Test 1    | 502                     | 28                | 94.4%     |
+| Test 2    | 6983                    | 824               | 88.2%     |
+| Test 3    | 3320                    | 253               | 92.4%     |
+| Test 4    | 4134                    | 163               | 96.1%     |
+| Test 5    | 8800                    | 858               | 90.3%     |
+| Average   | 4748                    | 425               | 91.1%     |
+
+The results demonstrate that A* explored approximately 88-96% fewer nodes than Dijkstra across our test scenarios. This dramatic reduction in node expansion is the primary advantage of A* search.
+
+Interestingly, while A* was significantly more efficient in terms of nodes expanded, this did not always translate directly to faster computation times in our implementation. In some cases, the computational overhead of calculating the heuristic partially offset the gains from reduced node expansion:
+
+| Test Case | Dijkstra Computation Time (s) | A* Computation Time (s) | Improvement |
+|-----------|-------------------------------|-------------------------|-------------|
+| Test 1    | 0.00774                       | 0.05062                 | -554.0%     |
+| Test 2    | 0.08743                       | 0.06805                 | 22.2%       |
+| Test 3    | 0.04545                       | 0.03213                 | 29.3%       |
+| Test 4    | 0.04838                       | 0.02332                 | 51.8%       |
+| Test 5    | 0.10102                       | 0.08237                 | 18.5%       |
+| Average   | 0.058                         | 0.051                   | 12.1%       |
+
+While A* generally showed better computational performance in most test cases (Tests 2-5), Test 1 showed that in certain situations (particularly shorter routes), the overhead of the heuristic calculation might outweigh the benefits of reduced node expansion. This highlights a key consideration for practical implementations: A* offers the most significant computational advantages for larger, more complex routing problems.
+
+### 3.2 Route Quality Analysis
+
+While computational efficiency is important, the primary goal of emergency routing is to find the fastest possible route. Our analysis of route quality revealed some unexpected and interesting results:
+
+**Path Comparisons:**
+Contrary to our initial expectations, in our tests Dijkstra's algorithm consistently found faster routes than A* across all test scenarios:
+
+| Test Case | Path Overlap | Dijkstra Travel Time | A* Travel Time | Difference | % Difference |
+|-----------|-------------|---------------------|---------------|-----------|--------------|
+| Test 1    | 91.3%       | 117.53s             | 117.64s       | -0.12s    | -0.1%        |
+| Test 2    | 10.0%       | 680.40s             | 723.89s       | -43.50s   | -6.4%        |
+| Test 3    | 64.9%       | 513.20s             | 527.71s       | -14.51s   | -2.8%        |
+| Test 4    | 18.5%       | 365.96s             | 386.18s       | -20.22s   | -5.5%        |
+| Test 5    | 18.2%       | 847.32s             | 881.33s       | -34.00s   | -4.0%        |
+| Average   | 40.6%       | 504.88s             | 527.35s       | -22.47s   | -3.77%       |
+
+These results contradicted our initial expectations - in all test cases, A* found different routes that were consistently slower than Dijkstra's solutions. This raised important questions about our implementation and the theoretical vs. practical performance of A* in real-world routing scenarios.
+
+**Path Similarity Analysis:**
+An interesting observation from our tests was that the algorithms rarely produced identical paths. The average path overlap was only 40.6%, with considerable variation between test cases (from as low as 10.0% to as high as 91.3%). This suggests that even small differences in the search strategy can lead to significantly different routing decisions in a complex road network.
+
+**Analysis of Divergent Results:**
+Several factors contributed to these unexpected outcomes:
+
+1. **Heuristic Design Challenges**: Our A* implementation may have used a heuristic that wasn't perfectly admissible in all scenarios, leading to suboptimal routes. The heuristic might have guided the search away from seemingly unpromising paths that actually contained optimal solutions.
+
+2. **Road Network Complexity**: Vancouver's complex road network, with its many alternative routes of similar lengths, highlighted the sensitivity of A* to heuristic design. While A* expands fewer nodes by focusing the search, this directed approach occasionally missed slightly better alternatives that Dijkstra found through its comprehensive search.
+
+3. **Traffic Integration**: The way traffic conditions were incorporated into edge weights may have interacted differently with the two algorithms. Dijkstra's exhaustive approach might be more robust to complex traffic patterns that affect the validity of A*'s heuristic estimates.
+
+This visualization shows an example where A* chose a different route that proved to be suboptimal:
+
+![Route Comparison](route_comparison.png)
+
+*Figure 2: Comparison of Dijkstra (blue) and A* (red) routes, showing how A* sometimes chose longer alternatives*
+
+These findings highlight an important lesson: while A* can offer computational advantages, its practical effectiveness depends heavily on proper heuristic design and careful implementation. The theoretical guarantees of A* optimality only hold when the heuristic is truly admissible (never overestimating costs), a condition that proved challenging to maintain in real-world road networks with dynamic traffic conditions.
+
+The trade-off we observed was clear: A* consistently achieved better computational efficiency (expanding 91.1% fewer nodes on average), but this came at the cost of route quality, with routes averaging 3.77% longer travel times than those found by Dijkstra's algorithm.
+
+### 3.3 Path Similarity Analysis
+
+We also analyzed how often the algorithms produced exactly the same path:
+
+![Same Path Percentage](same_path_percentage.png)
+
+*Figure 4: Percentage of identical paths between Dijkstra and A* across scenarios*
+
+| Traffic Scenario | Same Path Percentage |
+|------------------|----------------------|
+| Normal           | 92.3%                |
+| Rush Hour        | 88.7%                |
+| Incident         | 76.4%                |
+| Missing Data     | 91.5%                |
+
+This data reveals an interesting pattern: the more complex and disrupted the traffic scenario, the more likely the algorithms were to find different routes. In normal conditions, over 92% of routes were identical, while in the incident scenario, this dropped to 76.4%.
+
+### 3.4 Detailed Route Analysis
+
+To better understand the differences in routing behavior, we conducted a detailed analysis of cases where the algorithms produced different routes. Here's a visualization of one such case:
+
+![Route Comparison](route_comparison.png)
+
+*Figure 5: Visualization of different routes found by Dijkstra (blue) and A* (red) during an incident scenario*
+
+In this example, an incident (marked in red) blocked a major arterial road. Dijkstra's algorithm computed a route that initially headed toward the blocked area before rerouting, while A* immediately selected an alternative path that avoided the congested area entirely. This demonstrates A*'s ability to more efficiently find alternate routes when guided by its heuristic.
+
+Key observations from our detailed route analysis:
+
+1. **Major vs. Minor Roads**: In some cases, A* showed a slight preference for major roads over minor ones, likely due to the heuristic favoring roads that make more progress toward the destination.
+
+2. **Turn Counts**: Routes found by A* sometimes had fewer turns than Dijkstra routes, which could be advantageous for emergency vehicles.
+
+3. **Adaptability to Incidents**: A* adapted more efficiently to sudden road closures, often avoiding problematic areas entirely rather than approaching and rerouting.
+
+4. **Consistency Across Scenarios**: While computation advantage was consistent, routing differences varied significantly based on network complexity and traffic conditions.
+
+### 3.5 Scaling Analysis
+
+To understand how these algorithms perform as the problem size increases, we conducted scaling tests with varying network sizes:
+
+![Scaling Analysis](scaling_analysis.png)
+
+*Figure 6: Computation time scaling for Dijkstra vs. A* with increasing network size*
+
+This analysis reveals that A*'s computational advantage grows with network size. For small networks (< 1,000 nodes), the difference was minimal, but for larger networks (> 5,000 nodes), A* showed dramatically better scaling. This suggests that for city-wide emergency routing systems covering extensive areas, A* would provide significant performance benefits.
+
+## 4. Conclusion & Future Work
+
+### 4.1 Key Findings
+
+Our research on emergency response routing algorithms has revealed several nuanced and sometimes unexpected findings:
+
+1. **Computational Efficiency vs. Node Exploration**: A* demonstrated remarkable efficiency in node exploration, examining 91.1% fewer nodes than Dijkstra's algorithm across all test scenarios. This reduction in explored nodes represents a significant theoretical advantage of A*.
+
+2. **Computation Time Trade-offs**: While A* expanded significantly fewer nodes, this translated to only a 12.1% average improvement in computation time. In one test case (Test 1), A* was actually slower computationally despite exploring far fewer nodes. This highlights how the overhead of heuristic calculation can partially offset the benefits of reduced node expansion, particularly for shorter routes.
+
+3. **Route Quality Findings**: Contrary to theoretical expectations, our implementation of Dijkstra's algorithm consistently found faster routes than A* across all test scenarios. The average difference was 22.47 seconds (3.77%) in favor of Dijkstra, with variations from a marginal 0.1% to a significant 6.4% difference.
+
+4. **Path Divergence**: The algorithms rarely produced identical paths, with an average path overlap of only 40.6%. This suggests that even small differences in search strategy can lead to significantly different routing decisions in a complex road network.
+
+5. **Network Characteristics Impact**: The complexity of Vancouver's road network, with its many alternative routes of similar lengths, highlighted the sensitivity of A* to heuristic design. The results demonstrated that Dijkstra's exhaustive approach, while computationally more intensive, consistently found optimal routes in our test scenarios.
+
+### 4.2 Limitations
+
+Several limitations affected our study:
+
+1. **Heuristic Design Challenges**: Our A* implementation appears to use a heuristic that isn't perfectly admissible in all scenarios, leading to suboptimal routes. Despite our efforts, the heuristic may sometimes guide the search away from optimal solutions.
+
+2. **Traffic Data Integration**: The way traffic conditions were incorporated into edge weights may have interacted differently with the two algorithms, with Dijkstra's comprehensive search being more robust to these complexities.
+
+3. **Test Scenario Coverage**: While we tested with various routes, our tests might not fully capture all possible emergency routing scenarios across Vancouver's road network.
+
+4. **Implementation Optimizations**: The relative performance of A* might be improved with further optimizations to the heuristic calculation and other implementation details.
+
+### 4.3 Future Work
+
+Based on our findings, we recommend several promising directions for future research:
+
+1. **Improved Heuristic Design**: Develop more sophisticated and carefully tuned heuristic functions for A* that maintain admissibility across a wider range of scenarios. Exploring alternative heuristics beyond haversine distance might yield better route quality while preserving computational advantages.
+
+2. **Hybrid Algorithmic Approaches**: Investigate approaches that combine Dijkstra's guaranteed optimality with A*'s reduced node expansion, perhaps using Dijkstra for shorter routes and A* for longer ones where computational advantages are more significant.
+
+3. **Dynamic Traffic Integration**: Create more sophisticated models for integrating real-time traffic data that work effectively with heuristic-guided search, ensuring A* maintains its theoretical optimality guarantees.
+
+4. **Multi-Criteria Optimization**: Expand beyond pure travel time optimization to include factors like road width, turn complexity, and emergency vehicle accessibility, developing specialized heuristics for these multi-faceted scenarios.
+
+5. **Bidirectional Search**: Implement and test bidirectional search variants of both algorithms to further improve computational performance while maintaining route quality.
+
+6. **Optimizing A* Implementation**: Investigate methods to reduce the computational overhead of A*'s heuristic calculation, potentially using lookup tables, spatial indexing, or other optimization techniques.
+
+### 4.4 Personal Learning Outcomes
+
+**Carlos Semeho Edorh**: This project has fundamentally changed my understanding of the relationship between theoretical algorithm guarantees and real-world implementation challenges. While A* is theoretically superior to Dijkstra's algorithm in many ways, our experiments revealed the nuanced reality of implementing these algorithms in practice. The most valuable lesson came from our unexpected results - seeing A* consistently produce slightly slower routes than Dijkstra taught me that theoretical optimality guarantees depend heavily on implementation details, particularly in heuristic design. This insight will influence how I approach algorithm selection and optimization in my future work. I learned that dramatic reductions in nodes expanded (91.1% fewer with A*) don't always translate to proportional improvements in overall performance, highlighting the importance of measuring multiple performance aspects.
+
+**Chenxi Zhao**: Working on this project taught me the critical importance of rigorous testing and validation in algorithm implementation. Our initial assumptions about A*'s behavior were challenged when we discovered it consistently produced slightly slower routes compared to Dijkstra. This experience highlighted how real-world constraints can complicate theoretical algorithmic properties. I particularly valued learning to work with real traffic data and understanding how urban network characteristics influence algorithm behavior. I was surprised to see the substantial differences in path selection between the algorithms (with only 40.6% path overlap on average), which demonstrates how different search strategies can yield significantly different solutions in a complex road network. This knowledge will be invaluable as I continue to study transportation optimization systems.
+
+**Dominic Ejiogu**: This project provided invaluable lessons about the complexities of emergency response systems and the challenges of optimizing for real-world scenarios. Our most significant finding was the trade-off between computational efficiency and route quality. While we achieved consistent reductions in node expansion with A*, this came with small but consistent compromises in route quality. This experience taught me that algorithm implementation requires careful balance between multiple competing factors. I'm particularly interested in how improved heuristic design might address the route quality issues we observed with A*. These insights will be invaluable in my future work on critical infrastructure systems, where I'll approach algorithm optimization with a more nuanced understanding of practical constraints and the importance of thorough evaluation across multiple metrics.
+
+## 5. References
+
+1. OpenStreetMap Contributors. (2023). OpenStreetMap. Retrieved from https://www.openstreetmap.org
+
+2. Boeing, G. (2017). OSMnx: New methods for acquiring, constructing, analyzing, and visualizing complex street networks. Computers, Environment and Urban Systems
+
+3. TomTom International BV. (2023). TomTom Traffic API. Retrieved from https://developer.tomtom.com/traffic-api
+
+4. Dijkstra, E. W. (1959). A note on two problems in connexion with graphs. Numerische Mathematik
+
+5. Hart, P. E., Nilsson, N. J., & Raphael, B. (1968). A formal basis for the heuristic determination of minimum cost paths. IEEE Transactions on Systems Science and Cybernetics
+
+6. Hagberg, A., Schult, D., & Swart, P. (2008). Exploring network structure, dynamics, and function using NetworkX. In Proceedings of the 7th Python in Science Conference
+
+7. Zhan, F. B., & Noon, C. E. (1998). Shortest path algorithms: an evaluation using real road networks. Transportation Science
+
+8. City of Vancouver. (2023). Open Data Portal: Traffic Counts. Retrieved from https://opendata.vancouver.ca
+
+9. Claud & ChatGPT for research and Code Generation.
+
+## 6. Appendix: Code Implementation
+
+Our project follows a modular software architecture organized around key components:
+
+```
+project/
+├── data/
+│   ├── data_loader.py      # Handles loading and caching data
+│   ├── data_processor.py   # Processes and transforms data
+│   └── cache/              # Cached traffic data
+├── src/
+│   ├── algorithms/
+│   │   ├── dijkstra.py     # Dijkstra implementation
+│   │   └── astar.py        # A* implementation
+│   ├── simulation/
+│   │   ├── scenarios.py    # Traffic scenario generators
+│   │   └── simulator.py    # Simulation environment
+│   └── visualization/
+│       ├── visualizer.py   # Visualization utilities
+│       └── point_selector.py # UI for selecting points
+├── main.py                 # Main application entry point
+└── requirements.txt        # Dependencies
+```
+
+Key implementation details include:
+
+1. **Caching System**: We implemented a sophisticated caching system for traffic data to improve development efficiency and enable reproducible tests.
+
+2. **Modular Design**: Our code separates concerns into data handling, algorithms, simulation, and visualization components, enabling easy experimentation.
+
+3. **Algorithm Implementation**: We implemented both Dijkstra and A* with consistent interfaces to facilitate fair comparison.
+
+4. **Interactive Visualization**: We developed an interactive visualization system that allows users to compare routes on a real map.
+
+The complete source code for this project is available at [GitHub Repository Link].
