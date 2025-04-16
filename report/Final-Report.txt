@@ -420,7 +420,7 @@ Based on our findings, we recommend several promising directions for future rese
 
 8. City of Vancouver. (2023). Open Data Portal: Traffic Counts. Retrieved from https://opendata.vancouver.ca
 
-9. Claud & ChatGPT for research and Code Generation.
+9. Claud & ChatGPT.
 
 ## 6. Appendix: Code Implementation
 
