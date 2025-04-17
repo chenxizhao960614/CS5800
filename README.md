@@ -53,9 +53,9 @@ pip install -r requirements.txt
 python main.py
 
 ```
+ 
 
-
-# ================== Please Note the following ======================.
+# ========== Please Note the following ===========.
 
 
 If any issues later please run the following explicitly

@@ -1,0 +1,452 @@
+python guaranteed_different_paths.py
+=== Guaranteed Different Paths Test ===
+
+Loading cached road network...
+G:\Edcartech.com\Projects\Base\Jobs\Schools\NothEastern\School Begins\Courses\CS5800 Algorithms Spring 2025\Final Project\codes-base\venv\Lib\site-packages\networkx\readwrite\json_graph\node_link.py:287: FutureWarning:
+The default value will be changed to `edges="edges" in NetworkX 3.6.
+
+To make this warning go away, explicitly set the edges kwarg, e.g.:
+
+  nx.node_link_graph(data, edges="links") to preserve current behavior, or
+  nx.node_link_graph(data, edges="edges") for forward compatibility.
+  warnings.warn(
+Loaded graph with 8109 nodes and 23250 edges
+Added weights to 23250/23250 edges
+Loaded graph with 8109 nodes and 23250 edges
+
+Applying baseline traffic conditions...     
+
+Running comparison tests...
+
+Test 1: Route from 343361878 to 3913990605
+Running Dijkstra algorithm...
+Dijkstra Edge (343361878, 338854344): Weight=12.11s, Node delay=0.00s   
+Dijkstra Edge (338854344, 431379797): Weight=8.07s, Node delay=0.00s    
+Dijkstra Edge (431379797, 431379796): Weight=7.27s, Node delay=0.00s    
+Dijkstra Edge (431379796, 333416299): Weight=8.23s, Node delay=0.00s    
+Dijkstra Edge (333416299, 10962601265): Weight=6.46s, Node delay=0.00s  
+Dijkstra Edge (10962601265, 10962601239): Weight=0.57s, Node delay=0.00s
+Dijkstra Edge (10962601239, 1134255383): Weight=15.38s, Node delay=0.00s
+Dijkstra Edge (1134255383, 9690563610): Weight=2.27s, Node delay=0.00s  
+Dijkstra Edge (9690563610, 9690563611): Weight=4.79s, Node delay=0.00s  
+Dijkstra Edge (9690563611, 9690563612): Weight=0.98s, Node delay=0.00s  
+Dijkstra Edge (9690563612, 9690563602): Weight=6.05s, Node delay=0.00s  
+Dijkstra Edge (9690563602, 332836093): Weight=6.94s, Node delay=0.00s   
+Dijkstra Edge (332836093, 431379746): Weight=12.97s, Node delay=0.00s   
+Dijkstra Edge (431379746, 9084669143): Weight=17.89s, Node delay=0.00s  
+Dijkstra Edge (9084669143, 5883053209): Weight=4.92s, Node delay=0.00s  
+Dijkstra Edge (5883053209, 409840125): Weight=3.17s, Node delay=0.00s
+Dijkstra Edge (409840125, 11084088604): Weight=7.89s, Node delay=0.00s
+Dijkstra Edge (11084088604, 333630297): Weight=13.61s, Node delay=0.00s
+Dijkstra Edge (333630297, 5474670522): Weight=2.91s, Node delay=0.00s
+Dijkstra Edge (5474670522, 10971430985): Weight=0.92s, Node delay=0.00s
+Dijkstra Edge (10971430985, 646097147): Weight=6.40s, Node delay=0.00s
+Dijkstra Edge (646097147, 11175126847): Weight=8.26s, Node delay=0.00s
+Dijkstra Edge (11175126847, 646097151): Weight=7.16s, Node delay=0.00s
+Dijkstra Edge (646097151, 646097153): Weight=6.59s, Node delay=0.00s
+Dijkstra Edge (646097153, 646097155): Weight=6.14s, Node delay=0.00s
+Dijkstra Edge (646097155, 431379737): Weight=5.81s, Node delay=0.00s
+Dijkstra Edge (431379737, 9527719700): Weight=8.85s, Node delay=0.00s
+Dijkstra Edge (9527719700, 646097163): Weight=14.13s, Node delay=0.00s
+Dijkstra Edge (646097163, 646097165): Weight=5.73s, Node delay=0.00s
+Dijkstra Edge (646097165, 566842502): Weight=14.65s, Node delay=0.00s
+Dijkstra Edge (566842502, 326103990): Weight=13.80s, Node delay=0.00s
+Dijkstra Edge (326103990, 646097171): Weight=6.98s, Node delay=0.00s
+Dijkstra Edge (646097171, 10960589047): Weight=5.89s, Node delay=0.00s
+Dijkstra Edge (10960589047, 10960589046): Weight=0.89s, Node delay=0.00s
+Dijkstra Edge (10960589046, 4685351925): Weight=30.55s, Node delay=0.00s
+Dijkstra Edge (4685351925, 10960437867): Weight=0.83s, Node delay=0.00s
+Dijkstra Edge (10960437867, 3802879226): Weight=6.14s, Node delay=0.00s
+Dijkstra Edge (3802879226, 11151514441): Weight=2.86s, Node delay=0.00s
+Dijkstra Edge (11151514441, 333843083): Weight=3.85s, Node delay=0.00s
+Dijkstra Edge (333843083, 333843081): Weight=11.65s, Node delay=0.00s
+Dijkstra Edge (333843081, 333783370): Weight=5.98s, Node delay=0.00s
+Dijkstra Edge (333783370, 333781846): Weight=9.02s, Node delay=0.00s
+Dijkstra Edge (333781846, 3639980257): Weight=6.79s, Node delay=0.00s
+Dijkstra Edge (3639980257, 431379877): Weight=7.08s, Node delay=0.00s
+Dijkstra Edge (431379877, 431379716): Weight=8.38s, Node delay=0.00s
+Dijkstra Edge (431379716, 333774041): Weight=8.30s, Node delay=0.00s
+Dijkstra Edge (333774041, 333774040): Weight=1.21s, Node delay=0.00s
+Dijkstra Edge (333774040, 431379774): Weight=5.93s, Node delay=0.00s
+Dijkstra Edge (431379774, 431381884): Weight=6.80s, Node delay=0.00s
+Dijkstra Edge (431381884, 431379891): Weight=6.90s, Node delay=0.00s
+Dijkstra Edge (431379891, 431381883): Weight=9.19s, Node delay=0.00s
+Dijkstra Edge (431381883, 334408560): Weight=7.10s, Node delay=0.00s
+Dijkstra Edge (334408560, 334408562): Weight=6.86s, Node delay=0.00s
+Dijkstra Edge (334408562, 334408565): Weight=3.31s, Node delay=0.00s
+Dijkstra Edge (334408565, 334408575): Weight=3.48s, Node delay=0.00s
+Dijkstra Edge (334408575, 334408580): Weight=5.12s, Node delay=0.00s
+Dijkstra Edge (334408580, 334408577): Weight=1.46s, Node delay=0.00s
+Dijkstra Edge (334408577, 4696818026): Weight=5.44s, Node delay=0.00s
+Dijkstra Edge (4696818026, 333773527): Weight=0.64s, Node delay=0.00s
+Dijkstra Edge (333773527, 4696818023): Weight=0.52s, Node delay=0.00s
+Dijkstra Edge (4696818023, 4643643177): Weight=6.18s, Node delay=0.00s
+Dijkstra Edge (4643643177, 4643643179): Weight=0.65s, Node delay=0.00s
+Dijkstra Edge (4643643179, 4643643178): Weight=0.76s, Node delay=0.00s
+Dijkstra Edge (4643643178, 553507260): Weight=4.93s, Node delay=0.00s
+Dijkstra Edge (553507260, 333773525): Weight=8.31s, Node delay=0.00s
+Dijkstra Edge (333773525, 333773524): Weight=7.26s, Node delay=0.00s
+Dijkstra Edge (333773524, 256955909): Weight=9.56s, Node delay=0.00s
+Dijkstra Edge (256955909, 654558942): Weight=11.34s, Node delay=0.00s
+Dijkstra Edge (654558942, 3913990605): Weight=1.61s, Node delay=0.00s
+Dijkstra total path weight: 470.68s
+Running modified A* algorithm...
+Dijkstra Edge (343361878, 338854344): Weight=12.11s, Node delay=0.00s
+Dijkstra Edge (338854344, 431379797): Weight=8.07s, Node delay=0.00s
+Dijkstra Edge (431379797, 431379796): Weight=7.27s, Node delay=0.00s
+Dijkstra Edge (431379796, 333416299): Weight=8.23s, Node delay=0.00s
+Dijkstra Edge (333416299, 10962601265): Weight=6.46s, Node delay=0.00s
+Dijkstra Edge (10962601265, 10962601239): Weight=0.57s, Node delay=0.00s
+Dijkstra Edge (10962601239, 1134255383): Weight=15.38s, Node delay=0.00s
+Dijkstra Edge (1134255383, 9690563610): Weight=2.27s, Node delay=0.00s
+Dijkstra Edge (9690563610, 9690563611): Weight=4.79s, Node delay=0.00s
+Dijkstra Edge (9690563611, 9690563612): Weight=0.98s, Node delay=0.00s
+Dijkstra Edge (9690563612, 9690563602): Weight=6.05s, Node delay=0.00s
+Dijkstra Edge (9690563602, 332836093): Weight=6.94s, Node delay=0.00s
+Dijkstra Edge (332836093, 431379746): Weight=12.97s, Node delay=0.00s
+Dijkstra Edge (431379746, 9084669143): Weight=17.89s, Node delay=0.00s
+Dijkstra Edge (9084669143, 5883053209): Weight=4.92s, Node delay=0.00s
+Dijkstra Edge (5883053209, 409840125): Weight=3.17s, Node delay=0.00s
+Dijkstra Edge (409840125, 11084088604): Weight=7.89s, Node delay=0.00s
+Dijkstra Edge (11084088604, 333630297): Weight=13.61s, Node delay=0.00s
+Dijkstra Edge (333630297, 5474670522): Weight=2.91s, Node delay=0.00s
+Dijkstra Edge (5474670522, 10971430985): Weight=0.92s, Node delay=0.00s
+Dijkstra Edge (10971430985, 646097147): Weight=6.40s, Node delay=0.00s
+Dijkstra Edge (646097147, 11175126847): Weight=8.26s, Node delay=0.00s
+Dijkstra Edge (11175126847, 646097151): Weight=7.16s, Node delay=0.00s
+Dijkstra Edge (646097151, 646097153): Weight=6.59s, Node delay=0.00s
+Dijkstra Edge (646097153, 646097155): Weight=6.14s, Node delay=0.00s
+Dijkstra Edge (646097155, 431379737): Weight=5.81s, Node delay=0.00s
+Dijkstra Edge (431379737, 9527719700): Weight=8.85s, Node delay=0.00s
+Dijkstra Edge (9527719700, 646097163): Weight=14.13s, Node delay=0.00s
+Dijkstra Edge (646097163, 646097165): Weight=5.73s, Node delay=0.00s
+Dijkstra Edge (646097165, 566842502): Weight=14.65s, Node delay=0.00s
+Dijkstra Edge (566842502, 326103990): Weight=13.80s, Node delay=0.00s
+Dijkstra Edge (326103990, 646097171): Weight=6.98s, Node delay=0.00s
+Dijkstra Edge (646097171, 10960589047): Weight=5.89s, Node delay=0.00s
+Dijkstra Edge (10960589047, 10960589046): Weight=0.89s, Node delay=0.00s
+Dijkstra Edge (10960589046, 4685351925): Weight=30.55s, Node delay=0.00s
+Dijkstra Edge (4685351925, 10960437867): Weight=0.83s, Node delay=0.00s
+Dijkstra Edge (10960437867, 3802879226): Weight=6.14s, Node delay=0.00s
+Dijkstra Edge (3802879226, 11151514441): Weight=2.86s, Node delay=0.00s
+Dijkstra Edge (11151514441, 333843083): Weight=3.85s, Node delay=0.00s
+Dijkstra Edge (333843083, 333843081): Weight=11.65s, Node delay=0.00s
+Dijkstra Edge (333843081, 333783370): Weight=5.98s, Node delay=0.00s
+Dijkstra Edge (333783370, 333781846): Weight=9.02s, Node delay=0.00s
+Dijkstra Edge (333781846, 3639980257): Weight=6.79s, Node delay=0.00s
+Dijkstra Edge (3639980257, 431379877): Weight=7.08s, Node delay=0.00s
+Dijkstra Edge (431379877, 431379716): Weight=8.38s, Node delay=0.00s
+Dijkstra Edge (431379716, 333774041): Weight=8.30s, Node delay=0.00s
+Dijkstra Edge (333774041, 333774040): Weight=1.21s, Node delay=0.00s
+Dijkstra Edge (333774040, 431379774): Weight=5.93s, Node delay=0.00s
+Dijkstra Edge (431379774, 431381884): Weight=6.80s, Node delay=0.00s
+Dijkstra Edge (431381884, 431379891): Weight=6.90s, Node delay=0.00s
+Dijkstra Edge (431379891, 431381883): Weight=9.19s, Node delay=0.00s
+Dijkstra Edge (431381883, 334408560): Weight=7.10s, Node delay=0.00s
+Dijkstra Edge (334408560, 334408562): Weight=6.86s, Node delay=0.00s
+Dijkstra Edge (334408562, 334408565): Weight=3.31s, Node delay=0.00s
+Dijkstra Edge (334408565, 334408575): Weight=3.48s, Node delay=0.00s
+Dijkstra Edge (334408575, 334408580): Weight=5.12s, Node delay=0.00s
+Dijkstra Edge (334408580, 334408577): Weight=1.46s, Node delay=0.00s
+Dijkstra Edge (334408577, 4696818026): Weight=5.44s, Node delay=0.00s
+Dijkstra Edge (4696818026, 333773527): Weight=0.64s, Node delay=0.00s
+Dijkstra Edge (333773527, 4696818023): Weight=0.52s, Node delay=0.00s
+Dijkstra Edge (4696818023, 4643643177): Weight=6.18s, Node delay=0.00s
+Dijkstra Edge (4643643177, 4643643179): Weight=0.65s, Node delay=0.00s
+Dijkstra Edge (4643643179, 4643643178): Weight=0.76s, Node delay=0.00s
+Dijkstra Edge (4643643178, 553507260): Weight=4.93s, Node delay=0.00s
+Dijkstra Edge (553507260, 333773525): Weight=8.31s, Node delay=0.00s
+Dijkstra Edge (333773525, 333773524): Weight=7.26s, Node delay=0.00s
+Dijkstra Edge (333773524, 256955909): Weight=9.56s, Node delay=0.00s
+Dijkstra Edge (256955909, 654558942): Weight=11.34s, Node delay=0.00s
+Dijkstra Edge (654558942, 3913990605): Weight=1.61s, Node delay=0.00s
+Dijkstra total path weight: 470.68s
+A* Edge (343361878, 333385962): Weight=2.87s, Node delay=0.00s
+A* Edge (333385962, 431379798): Weight=7.97s, Node delay=0.00s
+A* Edge (431379798, 431379799): Weight=6.96s, Node delay=0.00s
+A* Edge (431379799, 431381984): Weight=8.25s, Node delay=0.00s
+A* Edge (431381984, 11051472215): Weight=8.11s, Node delay=0.00s
+A* Edge (11051472215, 11839410301): Weight=4.47s, Node delay=0.00s
+A* Edge (11839410301, 333387715): Weight=4.01s, Node delay=0.00s
+A* Edge (333387715, 333392430): Weight=20.42s, Node delay=0.00s
+A* Edge (333392430, 333387714): Weight=0.61s, Node delay=0.00s
+A* Edge (333387714, 654599507): Weight=1.03s, Node delay=0.00s
+A* Edge (654599507, 333384630): Weight=20.54s, Node delay=0.00s
+A* Edge (333384630, 631287594): Weight=3.29s, Node delay=0.00s
+A* Edge (631287594, 431380926): Weight=15.39s, Node delay=0.00s
+A* Edge (431380926, 431380930): Weight=4.63s, Node delay=0.00s
+A* Edge (431380930, 333381137): Weight=14.61s, Node delay=0.00s
+A* Edge (333381137, 333380994): Weight=5.14s, Node delay=0.00s
+A* Edge (333380994, 332870747): Weight=4.88s, Node delay=0.00s
+A* Edge (332870747, 11006014960): Weight=7.25s, Node delay=0.00s
+A* Edge (11006014960, 332845461): Weight=5.59s, Node delay=0.00s
+A* Edge (332845461, 256956769): Weight=9.58s, Node delay=0.00s
+A* Edge (256956769, 431379852): Weight=6.07s, Node delay=0.00s
+A* Edge (431379852, 431379853): Weight=7.49s, Node delay=0.00s
+A* Edge (431379853, 431379895): Weight=6.03s, Node delay=0.00s
+A* Edge (431379895, 431379854): Weight=6.49s, Node delay=0.00s
+A* Edge (431379854, 325849571): Weight=7.79s, Node delay=0.00s
+A* Edge (325849571, 325848565): Weight=4.02s, Node delay=0.00s
+A* Edge (325848565, 3092008782): Weight=12.34s, Node delay=0.00s
+A* Edge (3092008782, 1671470209): Weight=1.82s, Node delay=0.00s
+A* Edge (1671470209, 5130067321): Weight=3.46s, Node delay=0.00s
+A* Edge (5130067321, 322949511): Weight=5.95s, Node delay=0.00s
+A* Edge (322949511, 322954881): Weight=7.34s, Node delay=0.00s
+A* Edge (322954881, 322955769): Weight=6.09s, Node delay=0.00s
+A* Edge (322955769, 322978148): Weight=5.86s, Node delay=0.00s
+A* Edge (322978148, 11036354984): Weight=2.36s, Node delay=0.00s
+A* Edge (11036354984, 431375098): Weight=9.57s, Node delay=0.00s
+A* Edge (431375098, 4873628989): Weight=6.55s, Node delay=0.00s
+A* Edge (4873628989, 4873628987): Weight=0.52s, Node delay=0.00s
+A* Edge (4873628987, 4873628974): Weight=6.43s, Node delay=0.00s
+A* Edge (4873628974, 4873628985): Weight=7.07s, Node delay=0.00s
+A* Edge (4873628985, 4873628984): Weight=0.81s, Node delay=0.00s
+A* Edge (4873628984, 4873628981): Weight=7.54s, Node delay=0.00s
+A* Edge (4873628981, 326098461): Weight=21.37s, Node delay=0.00s
+A* Edge (326098461, 4685351919): Weight=23.15s, Node delay=0.00s
+A* Edge (4685351919, 4685351921): Weight=6.72s, Node delay=0.00s
+A* Edge (4685351921, 333844079): Weight=8.90s, Node delay=0.00s
+A* Edge (333844079, 333843081): Weight=8.39s, Node delay=0.00s
+A* Edge (333843081, 333843083): Weight=11.89s, Node delay=0.00s
+A* Edge (333843083, 333783369): Weight=8.63s, Node delay=0.00s
+A* Edge (333783369, 333781844): Weight=8.41s, Node delay=0.00s
+A* Edge (333781844, 333772511): Weight=8.57s, Node delay=0.00s
+A* Edge (333772511, 333772353): Weight=8.34s, Node delay=0.00s
+A* Edge (333772353, 333771015): Weight=6.41s, Node delay=0.00s
+A* Edge (333771015, 2625988647): Weight=8.67s, Node delay=0.00s
+A* Edge (2625988647, 333769221): Weight=13.75s, Node delay=0.00s
+A* Edge (333769221, 291466867): Weight=12.25s, Node delay=0.00s
+A* Edge (291466867, 4696783759): Weight=4.59s, Node delay=0.00s
+A* Edge (4696783759, 518292908): Weight=5.65s, Node delay=0.00s
+A* Edge (518292908, 518292890): Weight=1.31s, Node delay=0.00s
+A* Edge (518292890, 518292897): Weight=2.36s, Node delay=0.00s
+A* Edge (518292897, 1671267070): Weight=20.58s, Node delay=0.00s
+A* Edge (1671267070, 265684038): Weight=25.20s, Node delay=0.00s
+A* Edge (265684038, 265684041): Weight=32.68s, Node delay=0.00s
+A* Edge (265684041, 654558947): Weight=7.51s, Node delay=0.00s
+A* Edge (654558947, 4006463519): Weight=1.40s, Node delay=0.00s
+A* Edge (4006463519, 654558951): Weight=1.21s, Node delay=0.00s
+A* Edge (654558951, 4006463521): Weight=0.45s, Node delay=0.00s
+A* Edge (4006463521, 265684352): Weight=0.85s, Node delay=0.00s
+A* Edge (265684352, 3913990605): Weight=0.96s, Node delay=0.00s
+A* total path weight: 537.37s
+Dijkstra path length: 70 nodes
+A* path length: 69 nodes
+Dijkstra travel time: 470.68s
+A* travel time: 537.37s
+Paths identical: False
+Path overlap: 5.71%
+Time difference: -66.69s
+A* improvement: -14.17%
+
+Test 2: Route from 29936882 to 8192844368
+Running Dijkstra algorithm...
+Dijkstra Edge (29936882, 255183277): Weight=9.65s, Node delay=0.00s
+Dijkstra Edge (255183277, 347296071): Weight=10.98s, Node delay=0.00s
+Dijkstra Edge (347296071, 255183280): Weight=9.63s, Node delay=0.00s
+Dijkstra Edge (255183280, 3461414023): Weight=3.06s, Node delay=0.00s
+Dijkstra Edge (3461414023, 3461414016): Weight=15.86s, Node delay=0.00s
+Dijkstra Edge (3461414016, 3458502557): Weight=6.61s, Node delay=0.00s
+Dijkstra Edge (3458502557, 3438390291): Weight=6.51s, Node delay=0.00s
+Dijkstra Edge (3438390291, 3438390292): Weight=10.29s, Node delay=0.00s
+Dijkstra Edge (3438390292, 3461424709): Weight=5.56s, Node delay=0.00s
+Dijkstra Edge (3461424709, 3461424714): Weight=5.65s, Node delay=0.00s
+Dijkstra Edge (3461424714, 3461423488): Weight=13.17s, Node delay=0.00s
+Dijkstra Edge (3461423488, 497447226): Weight=12.27s, Node delay=0.00s
+Dijkstra Edge (497447226, 427777635): Weight=5.93s, Node delay=0.00s
+Dijkstra Edge (427777635, 347295990): Weight=10.34s, Node delay=0.00s
+Dijkstra Edge (347295990, 347295989): Weight=8.54s, Node delay=0.00s
+Dijkstra Edge (347295989, 11365533694): Weight=5.27s, Node delay=0.00s
+Dijkstra Edge (11365533694, 11365533695): Weight=0.55s, Node delay=0.00s
+Dijkstra Edge (11365533695, 11365533692): Weight=0.50s, Node delay=0.00s
+Dijkstra Edge (11365533692, 11365533693): Weight=0.44s, Node delay=0.00s
+Dijkstra Edge (11365533693, 427777612): Weight=9.96s, Node delay=0.00s
+Dijkstra Edge (427777612, 3438643285): Weight=5.93s, Node delay=0.00s
+Dijkstra Edge (3438643285, 60428376): Weight=13.58s, Node delay=0.00s
+Dijkstra Edge (60428376, 11186338657): Weight=10.12s, Node delay=0.00s
+Dijkstra Edge (11186338657, 11186338659): Weight=11.93s, Node delay=0.00s
+Dijkstra Edge (11186338659, 11144417762): Weight=12.68s, Node delay=0.00s
+Dijkstra Edge (11144417762, 11144417766): Weight=7.54s, Node delay=0.00s
+Dijkstra Edge (11144417766, 1102888338): Weight=3.37s, Node delay=0.00s
+Dijkstra Edge (1102888338, 766773285): Weight=9.93s, Node delay=0.00s
+Dijkstra Edge (766773285, 8192844367): Weight=13.06s, Node delay=0.00s
+Dijkstra Edge (8192844367, 8192844368): Weight=0.56s, Node delay=0.00s
+Dijkstra total path weight: 239.48s
+Running modified A* algorithm...
+Dijkstra Edge (29936882, 255183277): Weight=9.65s, Node delay=0.00s
+Dijkstra Edge (255183277, 347296071): Weight=10.98s, Node delay=0.00s
+Dijkstra Edge (347296071, 255183280): Weight=9.63s, Node delay=0.00s
+Dijkstra Edge (255183280, 3461414023): Weight=3.06s, Node delay=0.00s
+Dijkstra Edge (3461414023, 3461414016): Weight=15.86s, Node delay=0.00s
+Dijkstra Edge (3461414016, 3458502557): Weight=6.61s, Node delay=0.00s
+Dijkstra Edge (3458502557, 3438390291): Weight=6.51s, Node delay=0.00s
+Dijkstra Edge (3438390291, 3438390292): Weight=10.29s, Node delay=0.00s
+Dijkstra Edge (3438390292, 3461424709): Weight=5.56s, Node delay=0.00s
+Dijkstra Edge (3461424709, 3461424714): Weight=5.65s, Node delay=0.00s
+Dijkstra Edge (3461424714, 3461423488): Weight=13.17s, Node delay=0.00s
+Dijkstra Edge (3461423488, 497447226): Weight=12.27s, Node delay=0.00s
+Dijkstra Edge (497447226, 427777635): Weight=5.93s, Node delay=0.00s
+Dijkstra Edge (427777635, 347295990): Weight=10.34s, Node delay=0.00s
+Dijkstra Edge (347295990, 347295989): Weight=8.54s, Node delay=0.00s
+Dijkstra Edge (347295989, 11365533694): Weight=5.27s, Node delay=0.00s
+Dijkstra Edge (11365533694, 11365533695): Weight=0.55s, Node delay=0.00s
+Dijkstra Edge (11365533695, 11365533692): Weight=0.50s, Node delay=0.00s
+Dijkstra Edge (11365533692, 11365533693): Weight=0.44s, Node delay=0.00s
+Dijkstra Edge (11365533693, 427777612): Weight=9.96s, Node delay=0.00s
+Dijkstra Edge (427777612, 3438643285): Weight=5.93s, Node delay=0.00s
+Dijkstra Edge (3438643285, 60428376): Weight=13.58s, Node delay=0.00s
+Dijkstra Edge (60428376, 11186338657): Weight=10.12s, Node delay=0.00s
+Dijkstra Edge (11186338657, 11186338659): Weight=11.93s, Node delay=0.00s
+Dijkstra Edge (11186338659, 11144417762): Weight=12.68s, Node delay=0.00s
+Dijkstra Edge (11144417762, 11144417766): Weight=7.54s, Node delay=0.00s
+Dijkstra Edge (11144417766, 1102888338): Weight=3.37s, Node delay=0.00s
+Dijkstra Edge (1102888338, 766773285): Weight=9.93s, Node delay=0.00s
+Dijkstra Edge (766773285, 8192844367): Weight=13.06s, Node delay=0.00s
+Dijkstra Edge (8192844367, 8192844368): Weight=0.56s, Node delay=0.00s
+Dijkstra total path weight: 239.48s
+A* Edge (29936882, 3461409763): Weight=6.90s, Node delay=0.00s
+A* Edge (3461409763, 3461409782): Weight=7.21s, Node delay=0.00s
+A* Edge (3461409782, 3461412498): Weight=9.10s, Node delay=0.00s
+A* Edge (3461412498, 3458502560): Weight=6.40s, Node delay=0.00s
+A* Edge (3458502560, 428975856): Weight=5.98s, Node delay=0.00s
+A* Edge (428975856, 3438390695): Weight=9.43s, Node delay=0.00s
+A* Edge (3438390695, 728153880): Weight=10.47s, Node delay=0.00s
+A* Edge (728153880, 4006426868): Weight=5.50s, Node delay=0.00s
+A* Edge (4006426868, 8192973844): Weight=0.56s, Node delay=0.00s
+A* Edge (8192973844, 8192973842): Weight=0.45s, Node delay=0.00s
+A* Edge (8192973842, 8192973843): Weight=0.43s, Node delay=0.00s
+A* Edge (8192973843, 3461424696): Weight=10.42s, Node delay=0.00s
+A* Edge (3461424696, 3461424709): Weight=10.85s, Node delay=0.00s
+A* Edge (3461424709, 3461424705): Weight=12.09s, Node delay=0.00s
+A* Edge (3461424705, 347295979): Weight=13.22s, Node delay=0.00s
+A* Edge (347295979, 3461420028): Weight=11.33s, Node delay=0.00s
+A* Edge (3461420028, 3461420034): Weight=8.88s, Node delay=0.00s
+A* Edge (3461420034, 3461420036): Weight=11.80s, Node delay=0.00s
+A* Edge (3461420036, 3461420025): Weight=13.42s, Node delay=0.00s
+A* Edge (3461420025, 11251625529): Weight=9.97s, Node delay=0.00s
+A* Edge (11251625529, 11251625526): Weight=0.57s, Node delay=0.00s
+A* Edge (11251625526, 11251625527): Weight=0.84s, Node delay=0.00s
+A* Edge (11251625527, 3461417892): Weight=10.70s, Node delay=0.00s
+A* Edge (3461417892, 11365516858): Weight=6.41s, Node delay=0.00s
+A* Edge (11365516858, 11365516859): Weight=0.60s, Node delay=0.00s
+A* Edge (11365516859, 11365516856): Weight=0.67s, Node delay=0.00s
+A* Edge (11365516856, 3461418097): Weight=6.04s, Node delay=0.00s
+A* Edge (3461418097, 3461418093): Weight=6.81s, Node delay=0.00s
+A* Edge (3461418093, 728153870): Weight=10.81s, Node delay=0.00s
+A* Edge (728153870, 11223522438): Weight=12.41s, Node delay=0.00s
+A* Edge (11223522438, 247688383): Weight=7.30s, Node delay=0.00s
+A* Edge (247688383, 766773285): Weight=7.97s, Node delay=0.00s
+A* Edge (766773285, 766773288): Weight=6.49s, Node delay=0.00s
+A* Edge (766773288, 766773287): Weight=14.66s, Node delay=0.00s
+A* Edge (766773287, 8192844368): Weight=7.88s, Node delay=0.00s
+A* total path weight: 264.55s
+Dijkstra path length: 31 nodes
+A* path length: 36 nodes
+Dijkstra travel time: 239.48s
+A* travel time: 264.55s
+Paths identical: False
+Path overlap: 11.11%
+Time difference: -25.07s
+A* improvement: -10.47%
+
+Test 3: Route from 288983188 to 7567103494
+Running Dijkstra algorithm...
+Dijkstra Edge (288983188, 288982971): Weight=1.91s, Node delay=0.00s
+Dijkstra Edge (288982971, 288982995): Weight=6.97s, Node delay=0.00s
+Dijkstra Edge (288982995, 11206859115): Weight=8.13s, Node delay=0.00s
+Dijkstra Edge (11206859115, 11205655029): Weight=6.44s, Node delay=0.00s
+Dijkstra Edge (11205655029, 11205655033): Weight=10.55s, Node delay=0.00s
+Dijkstra Edge (11205655033, 288984986): Weight=8.38s, Node delay=0.00s
+Dijkstra Edge (288984986, 288984987): Weight=10.90s, Node delay=0.00s
+Dijkstra Edge (288984987, 11205692037): Weight=8.78s, Node delay=0.00s
+Dijkstra Edge (11205692037, 11072008761): Weight=12.69s, Node delay=0.00s
+Dijkstra Edge (11072008761, 11210678709): Weight=10.67s, Node delay=0.00s
+Dijkstra Edge (11210678709, 11072022441): Weight=18.24s, Node delay=0.00s
+Dijkstra Edge (11072022441, 430037809): Weight=8.29s, Node delay=0.00s
+Dijkstra Edge (430037809, 430037806): Weight=9.11s, Node delay=0.00s
+Dijkstra Edge (430037806, 348071033): Weight=3.61s, Node delay=0.00s
+Dijkstra Edge (348071033, 430037807): Weight=3.17s, Node delay=0.00s
+Dijkstra Edge (430037807, 348071304): Weight=4.34s, Node delay=0.00s
+Dijkstra Edge (348071304, 348071298): Weight=9.39s, Node delay=0.00s
+Dijkstra Edge (348071298, 11040563329): Weight=7.37s, Node delay=0.00s
+Dijkstra Edge (11040563329, 288984056): Weight=5.82s, Node delay=0.00s
+Dijkstra Edge (288984056, 348072496): Weight=6.67s, Node delay=0.00s
+Dijkstra Edge (348072496, 348072497): Weight=6.97s, Node delay=0.00s
+Dijkstra Edge (348072497, 348072498): Weight=6.01s, Node delay=0.00s
+Dijkstra Edge (348072498, 7567103491): Weight=8.04s, Node delay=0.00s
+Dijkstra Edge (7567103491, 7567102977): Weight=0.59s, Node delay=0.00s
+Dijkstra Edge (7567102977, 7567103494): Weight=0.58s, Node delay=0.00s
+Dijkstra total path weight: 183.62s
+Running modified A* algorithm...
+Dijkstra Edge (288983188, 288982971): Weight=1.91s, Node delay=0.00s
+Dijkstra Edge (288982971, 288982995): Weight=6.97s, Node delay=0.00s
+Dijkstra Edge (288982995, 11206859115): Weight=8.13s, Node delay=0.00s
+Dijkstra Edge (11206859115, 11205655029): Weight=6.44s, Node delay=0.00s
+Dijkstra Edge (11205655029, 11205655033): Weight=10.55s, Node delay=0.00s
+Dijkstra Edge (11205655033, 288984986): Weight=8.38s, Node delay=0.00s
+Dijkstra Edge (288984986, 288984987): Weight=10.90s, Node delay=0.00s
+Dijkstra Edge (288984987, 11205692037): Weight=8.78s, Node delay=0.00s
+Dijkstra Edge (11205692037, 11072008761): Weight=12.69s, Node delay=0.00s
+Dijkstra Edge (11072008761, 11210678709): Weight=10.67s, Node delay=0.00s
+Dijkstra Edge (11210678709, 11072022441): Weight=18.24s, Node delay=0.00s
+Dijkstra Edge (11072022441, 430037809): Weight=8.29s, Node delay=0.00s
+Dijkstra Edge (430037809, 430037806): Weight=9.11s, Node delay=0.00s
+Dijkstra Edge (430037806, 348071033): Weight=3.61s, Node delay=0.00s
+Dijkstra Edge (348071033, 430037807): Weight=3.17s, Node delay=0.00s
+Dijkstra Edge (430037807, 348071304): Weight=4.34s, Node delay=0.00s
+Dijkstra Edge (348071304, 348071298): Weight=9.39s, Node delay=0.00s
+Dijkstra Edge (348071298, 11040563329): Weight=7.37s, Node delay=0.00s
+Dijkstra Edge (11040563329, 288984056): Weight=5.82s, Node delay=0.00s
+Dijkstra Edge (288984056, 348072496): Weight=6.67s, Node delay=0.00s
+Dijkstra Edge (348072496, 348072497): Weight=6.97s, Node delay=0.00s
+Dijkstra Edge (348072497, 348072498): Weight=6.01s, Node delay=0.00s
+Dijkstra Edge (348072498, 7567103491): Weight=8.04s, Node delay=0.00s
+Dijkstra Edge (7567103491, 7567102977): Weight=0.59s, Node delay=0.00s
+Dijkstra Edge (7567102977, 7567103494): Weight=0.58s, Node delay=0.00s
+Dijkstra total path weight: 183.62s
+A* Edge (288983188, 255472194): Weight=15.40s, Node delay=0.00s
+A* Edge (255472194, 255472206): Weight=9.34s, Node delay=0.00s
+A* Edge (255472206, 288982969): Weight=6.07s, Node delay=0.00s
+A* Edge (288982969, 255472221): Weight=11.09s, Node delay=0.00s
+A* Edge (255472221, 598412911): Weight=11.78s, Node delay=0.00s
+A* Edge (598412911, 11206859506): Weight=14.42s, Node delay=0.00s
+A* Edge (11206859506, 11206859103): Weight=7.40s, Node delay=0.00s
+A* Edge (11206859103, 3126979379): Weight=3.17s, Node delay=0.00s
+A* Edge (3126979379, 575912212): Weight=4.58s, Node delay=0.00s
+A* Edge (575912212, 255472297): Weight=5.30s, Node delay=0.00s
+A* Edge (255472297, 320093525): Weight=10.11s, Node delay=0.00s
+A* Edge (320093525, 430037812): Weight=15.57s, Node delay=0.00s
+A* Edge (430037812, 255472329): Weight=19.68s, Node delay=0.00s
+A* Edge (255472329, 331354791): Weight=3.35s, Node delay=0.00s
+A* Edge (331354791, 426466521): Weight=5.18s, Node delay=0.00s
+A* Edge (426466521, 288983734): Weight=4.47s, Node delay=0.00s
+A* Edge (288983734, 598412904): Weight=6.94s, Node delay=0.00s
+A* Edge (598412904, 598412902): Weight=6.88s, Node delay=0.00s
+A* Edge (598412902, 598412935): Weight=2.52s, Node delay=0.00s
+A* Edge (598412935, 348072626): Weight=4.14s, Node delay=0.00s
+A* Edge (348072626, 348072496): Weight=5.87s, Node delay=0.00s
+A* Edge (348072496, 348072429): Weight=6.59s, Node delay=0.00s
+A* Edge (348072429, 348072430): Weight=8.45s, Node delay=0.00s
+A* Edge (348072430, 7567102977): Weight=8.30s, Node delay=0.00s
+A* Edge (7567102977, 7567103494): Weight=0.58s, Node delay=0.00s
+A* total path weight: 197.23s
+Dijkstra path length: 26 nodes
+A* path length: 26 nodes
+Dijkstra travel time: 183.62s
+A* travel time: 197.23s
+Paths identical: False
+Path overlap: 15.38%
+Time difference: -13.61s
+A* improvement: -7.41%
+
+=== Summary of Results ===
+Tests with different paths: 3 out of 3
+Average path overlap: 10.74%
+Average time difference: -35.12s
+
+guaranteed_different_results.csv Below
+
+test,source,target,dijkstra_travel_time,astar_travel_time,dijkstra_path_length,astar_path_length,paths_identical,path_overlap_pct,time_diff,improvement_pct
+1,343361878,3913990605,470.68151137638745,537.3741617298258,70,69,False,5.714285714285714,-66.69265035343835,-14.169379663631315
+2,29936882,8192844368,239.48463091326786,264.55414404332134,31,36,False,11.11111111111111,-25.06951313005348,-10.468109387417305
+3,288983188,7567103494,183.61968324945602,197.22621622020898,26,26,False,15.384615384615385,-13.606532970752966,-7.410171246329757
