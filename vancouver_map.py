@@ -5,11 +5,29 @@ from tomtom_api import get_flow_data, get_incidents_with_magnitude, calculate_ed
 from math import radians, sin, cos, sqrt, atan2, degrees
 import matplotlib.pyplot as plt
 
-TOMTOM_API_KEY = 'nCxojQDHEzOQcIAPVivZX1joMIgr8nsL'
+TOMTOM_API_KEY = 'RhNwSSzqbC5B6VAieYAAkzDl0i8K5QAb'
 GRAPH_PATH = "vancouver.graphml"
+
 
 # Helper Function
 def find_nearby_incident(lat, lon, incidents, threshold_m=25):
+    """
+    Finds the closest traffic incident to a given geographic point within a specified threshold.
+
+    Parameters:
+        lat (float): Latitude of the edge midpoint.
+        lon (float): Longitude of the edge midpoint.
+        incidents (list): List of incidents fetched from the TomTom Incident API.
+        threshold_m (int, optional): Distance threshold in meters to consider an incident as 'nearby'. Defaults to 25 meters.
+
+    Returns:
+        dict: The 'properties' dictionary of the nearest incident (containing 'iconCategory', 'magnitudeOfDelay', etc.)
+              if one is found within the threshold. Otherwise, returns an empty dictionary.
+    
+    Notes:
+        - Converts lat/lon proximity to meters using an approximate conversion factor (1 degree ≈ 111139 meters).
+        - Handles both Point-type and LineString-type incident geometries.
+    """
     pt = Point(lon, lat)
     for inc in incidents:
         geom = inc.get("geometry", {})
@@ -23,8 +41,25 @@ def find_nearby_incident(lat, lon, incidents, threshold_m=25):
                 return inc.get("properties", {})
     return {}
 
+
 # Integration with OSMnx Graph
 def load_graph():
+    """
+    Loads or constructs the road network graph for Vancouver using OSMnx.
+
+    Returns:
+        networkx.MultiDiGraph: A directed graph where nodes represent intersections and edges represent road segments.
+
+    Behavior:
+        - Attempts to load a pre-saved GraphML file ('vancouver.graphml').
+        - If the file doesn't exist, fetches the graph from OpenStreetMap using OSMnx and saves it locally.
+        - Annotates each edge with a representative midpoint coordinate ('lat', 'lon') using either:
+            - the geometric midpoint if the 'geometry' field exists, or
+            - the average of the edge’s endpoint coordinates.
+
+    Usage:
+        This function ensures the road network is prepared for downstream traffic processing and routing.
+    """
     try:
         G = ox.load_graphml(GRAPH_PATH)
     except:
@@ -102,14 +137,38 @@ def update_edge_weights_with_bbox(G, start_lat, start_lon, end_lat, end_lon, buf
 
 # === Routing ===
 def haversine_distance(lat1, lon1, lat2, lon2):
-    R = 6371.0
+    """
+    Calculates the great-circle distance between two points on the Earth's surface 
+    using the Haversine formula.
+
+    Parameters:
+        lat1 (float): Latitude of the first point in decimal degrees.
+        lon1 (float): Longitude of the first point in decimal degrees.
+        lat2 (float): Latitude of the second point in decimal degrees.
+        lon2 (float): Longitude of the second point in decimal degrees.
+
+    Returns:
+        float: Distance between the two points in meters.
+    """
+    R = 6371.0  # Radius of the Earth in kilometers
     dlat = radians(lat2 - lat1)
     dlon = radians(lon2 - lon1)
-    a = sin(dlat/2)**2 + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlon/2)**2
-    return R * 2 * sqrt(a) * 1000
+    a = sin(dlat / 2)**2 + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlon / 2)**2
+    return R * 2 * sqrt(a) * 1000  # Convert to meters
 
 
 def euclidean_heuristic(u, v, G):
+    """
+    Computes the Euclidean distance between two nodes in the graph based on their coordinates.
+
+    Parameters:
+        u (int): The node ID of the starting node.
+        v (int): The node ID of the destination node.
+        G (networkx.MultiDiGraph): The graph containing the nodes and their attributes.
+
+    Returns:
+        float: The straight-line (Euclidean) distance between nodes u and v.
+    """
     x1, y1 = G.nodes[u]['x'], G.nodes[u]['y']
     x2, y2 = G.nodes[v]['x'], G.nodes[v]['y']
     return sqrt((x1 - x2)**2 + (y1 - y2)**2)
@@ -163,6 +222,25 @@ def compute_route(G, start_lat, start_lon, end_lat, end_lon, threshold=1000):
 
 
 def compute_directions(G, path):
+    """
+    Generates turn-by-turn textual navigation instructions based on a given route path.
+
+    Parameters:
+        G (networkx.MultiDiGraph): The OSMnx road network graph containing node and edge attributes.
+        path (list): A list of node IDs representing the computed shortest path.
+
+    Returns:
+        None: The function prints the step-by-step directions to the console.
+
+    Description:
+        This function parses a path (a sequence of graph node IDs) and determines the direction 
+        of each turn based on geometric relationships between consecutive edges.
+
+    Turn Classification:
+        - Turn Left: angle > 30 degrees
+        - Turn Right: angle < -30 degrees
+        - Continue Straight: angle between -30 and 30 degrees
+    """
     print("\n Turn-by-Turn Directions:")
     i = 0
     while i < len(path) - 2:
